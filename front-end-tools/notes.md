@@ -19,3 +19,9 @@ Indicate the current page's location within a navigation hierarchy.
 
 ### Picture
 A picture is worth a thousand word. 
+
+### About Bootstrap notes
+其实bootstrap学习不需要做笔记，所有的笔记都在官网上:D
+
+### Button
+需要用到按钮的地方不一定非要用button标签，可以直接用a标签，并将a标签中的type属性改为button。
