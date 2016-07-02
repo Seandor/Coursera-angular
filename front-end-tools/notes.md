@@ -25,3 +25,9 @@ A picture is worth a thousand word.
 
 ### Button
 需要用到按钮的地方不一定非要用button标签，可以直接用a标签，并将a标签中的type属性改为button。
+
+### Modal
+模态对话框。是这么翻译吗？感觉翻译了还不如不翻译。
+
+### Nodejs
+Nodejs是基于Chrome V8 Javascript引擎开发的，Javascript运行环境。它使用事件驱动和非阻塞性I/O模型，所以非常轻量级且高效率。
