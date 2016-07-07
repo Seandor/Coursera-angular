@@ -54,3 +54,11 @@ module.exports = function (grunt) {
 - {}
 - !
 
+### Gruntfile
+Grunt使用的难点在于配置Gruntfile.js，这需要在以后不断的练习中熟悉。
+
+### Gulp
+Gulp是基于代码的task runner。
+
+### Scope
+原理和javascript中的scope类似。
