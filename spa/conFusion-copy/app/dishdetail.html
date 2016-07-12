@@ -25,20 +25,20 @@
 
 <body>
     <div class="container">
-        <div class="row row-content" ng-controller="dishDetailController as dishDetailCtrl">
+        <div class="row row-content" ng-controller="DishDetailController">
             <div class="col-xs-12">
                 <div class="media">
                     <div class="media-left media-middle">
                         <a href="#">
-                        <img class="media-object img-thumbnail" ng-src={{dishDetailCtrl.dish.image}} alt="Uthappizza">
+                        <img class="media-object img-thumbnail" ng-src={{dish.image}} alt="Uthappizza">
                         </a>
                     </div>
                     <div class="media-body">
-                        <h2 class="media-heading">{{dishDetailCtrl.dish.name}}
-                            <span class="label label-danger label-xs">{{dishDetailCtrl.dish.label}}</span>
-                            <span class="badge">{{dishDetailCtrl.dish.price | currency}}</span>
+                        <h2 class="media-heading">{{dish.name}}
+                            <span class="label label-danger label-xs">{{dish.label}}</span>
+                            <span class="badge">{{dish.price | currency}}</span>
                         </h2>
-                        <p>{{dishDetailCtrl.dish.description}}</p>
+                        <p>{{dish.description}}</p>
                     </div>
                 </div>
             </div>
@@ -47,12 +47,12 @@
             </div>
             <div class="col-xs-5" style="margin-top: 10px">
                 <label for="order" style="color: silver">Sort by:</label>
-                <input id="order" placeholder="order" type="text" ng-model="dishDetailCtrl.sortFilter">
+                <input id="order" placeholder="order" type="text" ng-model="sortFilter">
             </div>
             <div class="col-xs-9 col-xs-offset-1">
                 <ul class="list-unstyled">
                     <li>
-                        <blockquote ng-repeat="comment in dishDetailCtrl.dish.comments | orderBy: dishDetailCtrl.sortFilter">
+                        <blockquote ng-repeat="comment in dish.comments | orderBy: sortFilter">
                             <p>{{comment.rating}} Star</p>
                             <p>{{comment.comment}}</p>
                             <footer>{{comment.author}}, {{comment.date | date:'MMM. dd, yyyy'}}</footer>
@@ -60,66 +60,66 @@
                     </li>
                 </ul>             
             </div>
+            <div class="col-xs-9 col-xs-offset-1" ng-controller="DishCommentController">
+                <ul class="list-unstyled">
+                    <li ng-show="commentForm.$valid">
+                        <blockquote>
+                            <p>{{dishComment.rating}} Star</p>
+                            <p>{{dishComment.comment}}</p>
+                            <footer>{{dishComment.author}}, {{comment.date | date:'MMM. dd, yyyy'}}</footer>
+                        </blockquote>
+                    </li>
+                </ul>
+                <form class="form-horizontal" name="commentForm"
+                        ng-submit="submitComment()" novalidate>
+                    <div class="form-group" ng-class="{'has-error': commentForm.author.$error.required && !commentForm.author.$pristine}">
+                        <label for="customerName" class="col-sm-2 control-label">Your Name</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="text" name="customerName" id="customerName" placeholder="Enter Your Name" ng-model="dishComment.author" required>
+                            <span ng-show="commentForm.author.$error.required && !commentForm.author.$pristine" class="help-block">Your name is required.</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="numberOfStars" class="col-sm-2 control-label">Number of Stars</label>
+                        <div class="col-sm-10 inline-radio" id="numberOfStars">
+                            <label>
+                                <input ng-model="dishComment.rating" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1"> 1
+                            </label>
+                            <label>
+                                <input ng-model="dishComment.rating" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2"> 2
+                            </label>
+                            <label>
+                                <input ng-model="dishComment.rating" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="3"> 3
+                            </label>
+                            <label>
+                                <input ng-model="dishComment.rating" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="4"> 4
+                            </label>
+                            <label>
+                                <input ng-model="dishComment.rating" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="5"> 5
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': commentForm.comment.$error.required && !commentForm.comment.$pristine}">
+                        <label for="comment" class="col-sm-2 control-label">Comment</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="comment" name="comment" rows="12" ng-model="dishComment.comment" required></textarea>
+                            <span ng-show="commentForm.comment.$error.required && !commentForm.comment.$pristine" class="help-block">Your comment is required.</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary" ng-disabled="commentForm.$invalid">Submit Comment</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
+    <!-- build:js scripts/main.js -->
     <script src="../bower_components/angular/angular.min.js"></script>
-    <script>
-
-        var app = angular.module('confusionApp',[]);
-        
-        app.controller('dishDetailController', function() {
-
-        var sortFilter = "";
-
-        var dish={
-            name:'Uthapizza',
-            image: 'images/uthapizza.png',
-            category: 'mains', 
-            label:'Hot',
-            price:'4.99',
-            description:'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.',
-            comments: [
-            {
-             rating:5,
-             comment:"Imagine all the eatables, living in conFusion!",
-             author:"John Lemon",
-             date:"2012-10-16T17:57:28.556094Z"
-           },
-           {
-             rating:4,
-             comment:"Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
-             author:"Paul McVites",
-             date:"2014-09-05T17:57:28.556094Z"
-           },
-           {
-             rating:3,
-             comment:"Eat it, just eat it!",
-             author:"Michael Jaikishan",
-             date:"2015-02-13T17:57:28.556094Z"
-           },
-           {
-             rating:4,
-             comment:"Ultimate, Reaching for the stars!",
-             author:"Ringo Starry",
-             date:"2013-12-02T17:57:28.556094Z"
-           },
-           {
-             rating:2,
-             comment:"It's your birthday, we're gonna party!",
-             author:"25 Cent",
-             date:"2011-12-02T17:57:28.556094Z"
-           }
-
-           ]
-         };
-
-         this.dish = dish;
-
-       });
-
-    </script>
-
+    <script src="scripts/app.js"></script>
+    <!-- endbuild -->
 </body>
 
 </html>

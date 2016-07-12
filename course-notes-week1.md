@@ -80,7 +80,7 @@
 ```
 
 #### 2.8 ngModel指令
-- ngModel (ng-model)指令用于将输入数据绑定到一个scope中的变量。
+- ngModel (ng-model)指令用于将__输入数据__绑定到一个scope中的变量。
   - Two-way data binding
 ```html
 <p>{{dish.description}}</p>

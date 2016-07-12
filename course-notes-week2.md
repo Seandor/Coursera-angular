@@ -1,4 +1,4 @@
-# Grunt and Gulp
+# Task runners, angular scope, form & form validation
 
 ### 为什么要使用Task Runners
 - Web 开发包含了很多重复性的工作
@@ -62,3 +62,6 @@ Gulp是基于代码的task runner。
 
 ### Scope
 原理和javascript中的scope类似。
+
+### form validation
+由于HTML5自带form validation，所以在使用angular的时候我们希望使用angular的form validation来取代HTML5自带的form validation。
