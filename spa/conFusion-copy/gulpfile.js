@@ -29,13 +29,8 @@
 	    return del(['dist']);
 	});
 
-	// Default task
-	gulp.task('default', ['clean'], function() {
-	    gulp.start('usemin', 'imagemin','copyfonts');
-	});
-
 	gulp.task('usemin',['jshint'], function () {
-	  	return gulp.src('./app/contactus.html')
+	  	return gulp.src('./app/index.html')
 	    .pipe(usemin({
 	    css:[minifycss(),rev()],
 	    js: [ngannotate(),uglify(),rev()]
@@ -51,11 +46,16 @@
 	    // .pipe(notify({ message: 'Images task complete' }))
 	});
 
-	gulp.task('copyfonts', ['clean'], function() {
+	gulp.task('copyfonts', function() {
 	   	gulp.src('./bower_components/font-awesome/fonts/**/*.{ttf,woff,eof,svg}*')
 	   	.pipe(gulp.dest('./dist/fonts'));
 	   	gulp.src('./bower_components/bootstrap/dist/fonts/**/*.{ttf,woff,eof,svg}*')
 	   	.pipe(gulp.dest('./dist/fonts'));
+	});
+
+	gulp.task('copyhtml', function() {
+	   	gulp.src('./app/templates/*.html')
+	   	.pipe(gulp.dest('./dist/templates/'));
 	});
 
 	// Watch
@@ -65,6 +65,11 @@
 	    // Watch image files
 	  	gulp.watch('app/images/**/*', ['imagemin']);
 
+	});
+
+	// Default task
+	gulp.task('default', ['clean'], function() {
+	    gulp.start('usemin', 'imagemin','copyfonts', 'copyhtml');
 	});
 
 	gulp.task('browser-sync', ['default'], function () {
@@ -79,7 +84,7 @@
 	   	browserSync.init(files, {
 	      	server: {
 	         	baseDir: "dist",
-	         	index: "contactus.html"
+	         	index: "index.html"
 	      	}
 	});
 	        // Watch any files in dist/, reload on change
