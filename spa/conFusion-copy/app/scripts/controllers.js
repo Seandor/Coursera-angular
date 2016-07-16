@@ -77,10 +77,10 @@ angular.module('confusionApp')
 
     }])
 
-    .controller('DishDetailController', ['$scope', '$routeParams', 'menuFactory', function($scope, $routeParams, menuFactory) {
+    .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', function($scope, $stateParams, menuFactory) {
         'use strict';
 
-        var dish = menuFactory.getDish(parseInt($routeParams.id, 10));
+        var dish = menuFactory.getDish(parseInt($stateParams.id, 10));
                
         $scope.dish = dish;
     }])
@@ -88,7 +88,7 @@ angular.module('confusionApp')
     .controller('DishCommentController', ['$scope', function($scope) {
         'use strict'; 
 
-        $scope.dishComment = { rating: 5, comment: "", author: ""};
+        $scope.dishComment = { rating: 5, comment: "", author: "", date: ""};
                    
         $scope.submitComment = function () {
                        
@@ -102,8 +102,26 @@ angular.module('confusionApp')
         $scope.commentForm.$setPristine();
         console.log($scope.dishComment);               
         //Step 5: reset your JavaScript object that holds your comment
-        $scope.dishComment = { rating: 5, comment: "", author: ""};
+        $scope.dishComment = { rating: 5, comment: "", author: "", date: ""};
         $scope.date = null;
         };
-    }])       
+    }])
+
+    .controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', function($scope, menuFactory, corporateFactory) {
+        'use strict';
+
+        $scope.featuredDish = menuFactory.getDish(0);
+
+        $scope.promotion = menuFactory.getPromotion(0);
+
+        $scope.executiveChef = corporateFactory.getLeader(3);
+
+    }])
+    
+    .controller('AboutController', ['$scope', 'corporateFactory', function($scope, corporateFactory) {
+        'use strict';
+        
+        $scope.leaders = corporateFactory.getLeaders();
+        console.log($scope.leaders);
+    }])
 ;

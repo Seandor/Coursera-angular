@@ -54,8 +54,8 @@
 	});
 
 	gulp.task('copyhtml', function() {
-	   	gulp.src('./app/templates/*.html')
-	   	.pipe(gulp.dest('./dist/templates/'));
+	   	gulp.src('./app/views/*.html')
+	   	.pipe(gulp.dest('./dist/views/'));
 	});
 
 	// Watch
