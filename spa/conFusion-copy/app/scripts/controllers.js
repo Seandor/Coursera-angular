@@ -57,7 +57,7 @@ angular.module('confusionApp')
         $scope.invalidChannelSelection = false;
     }])
 
-    .controller('FeedbackController', ['$scope', function ($scope) {
+    .controller('FeedbackController', ['$scope', 'feedbackFactory', function ($scope, feedbackFactory) {
         'use strict';
 
         $scope.sendFeedback = function () {
@@ -70,7 +70,7 @@ angular.module('confusionApp')
                 $scope.invalidChannelSelection = false;
 
                 // ajax request here
-                    
+                feedbackFactory.getFeedback().save($scope.feedback);    
 
                 // clear out the form
                 $scope.feedback = { mychannel: "",
