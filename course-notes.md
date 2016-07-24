@@ -166,3 +166,27 @@ Gulp是基于代码的task runner。
 
 ### form validation
 由于HTML5自带form validation，所以在使用angular的时候我们希望使用angular的form validation来取代HTML5自带的form validation。
+
+
+# Testing Angular Applications
+
+### Unit Test & Setup the unit test environment
+```
+npm install jasmine-core --save-dev
+npm install karma-cli -g
+npm install phantomjs-prebuilt karma-phantomjs-launcher karma-chrome-launcher --save-dev
+bower install angular-mocks -S
+```
+
+### Test driven development
+先写好测试用例，然后再编写代码，让编写的代码能够通过这些预先设计好的测试用例。
+
+### test records
+搭建karma，jasmine的测试环境失败了，因为ui-router的问题，网上下了一个stateMock，但是也解决不了，看了一下时间，stateMock是别人13年写的，可能已经不适用于现在的ui-router版本了。所以现在暂时不纠结这个了，以后有空再弄。
+
+又照着论坛上加了一段代码，ui-router的问题没了，却又引来了新的问题，等以后弄清楚原理再来看为什么会提示scope是undefined。 应该要去看一看jasmine的用法。
+
+### End-to-End Testing
+Unit test很有用，但不能覆盖所有的方面。
+
+关于angular测试的内容需要专门单独的去学习，不能仅仅通过一两个视频就能搞定它。 Angular的课程也到此为止吧。

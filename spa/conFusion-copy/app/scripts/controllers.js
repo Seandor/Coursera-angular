@@ -169,9 +169,9 @@ angular.module('confusionApp')
     .controller('AboutController', ['$scope', 'corporateFactory', function($scope, corporateFactory) {
         'use strict';
         $scope.showLeaders = false;
-        $scope.leaderMessage = false;
+        $scope.leaderMessage = "Loading";
 
-        $scope.leaders = corporateFactory.getLeaders().get({id: 0})
+        $scope.leaders = corporateFactory.getLeaders().query()
         .$promise.then(
             function (response) {
                 $scope.leaders = response;
